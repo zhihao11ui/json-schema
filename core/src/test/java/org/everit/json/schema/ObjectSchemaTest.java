@@ -33,6 +33,7 @@ import org.everit.json.schema.loader.SchemaLoader;
 import org.json.JSONObject;
 import org.json.JSONPointer;
 import org.junit.jupiter.api.Test;
+import org.skyscreamer.jsonassert.JSONAssert;
 
 import com.google.re2j.Pattern;
 
@@ -412,7 +413,7 @@ public class ObjectSchemaTest {
         JSONObject rawSchemaJson = loader.readObj("tostring/objectschema-unprocessed.json");
         Schema schema = SchemaLoader.load(rawSchemaJson);
         String actual = schema.toString();
-        assertThat(new JSONObject(actual), sameJsonAs(rawSchemaJson));
+        JSONAssert.assertEquals(rawSchemaJson.toString(), actual, false);
     }
 
     @Test
